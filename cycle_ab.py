@@ -6,13 +6,14 @@ t16000m = gremlin.input_devices.JoystickDecorator(
     mode="Default"
 )
 
+# Flag tracking the state of the afterburner
 g_ab_active = False
 
-# Macro executed when the activation zone is entered by the axis
+# Macro executed to activate the AB
 start_macro = gremlin.macro.Macro()
 start_macro.action(gremlin.macro.Keys.LShift, True)
 
-# Macro executed when the activation zon is left by the axis
+# Macro executed to stop the AB
 stop_macro = gremlin.macro.Macro()
 stop_macro.action(gremlin.macro.Keys.LShift, False)
 
