@@ -61,6 +61,7 @@ def button1(event, vjoy):
         # Ensure the button is released
         vjoy[1].button(btn_id).is_pressed = False
 
+
 @t16000.button(2)
 def button2(event, vjoy):
     btn_id = 6
@@ -75,3 +76,17 @@ def button2(event, vjoy):
             g_timer.cancel()
         vjoy[1].button(btn_id).is_pressed = False
 
+
+@t16000.button(4)
+def button4(event, joy, vjoy):
+    btn_id = 6
+    global g_is_running, g_timer
+    if event.is_pressed and joy[1].button(3).is_pressed:
+        vjoy[1].button(btn_id).is_pressed = True
+        g_timer = threading.Timer(g_timeout, lambda: pulse(vjoy, btn_id))
+        g_timer.start()
+    else:
+        g_is_running = False
+        if g_timer:
+            g_timer.cancel()
+        vjoy[1].button(btn_id).is_pressed = False
