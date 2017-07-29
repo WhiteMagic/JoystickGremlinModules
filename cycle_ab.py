@@ -11,11 +11,11 @@ g_ab_active = False
 
 # Macro executed to activate the AB
 start_macro = gremlin.macro.Macro()
-start_macro.action(gremlin.macro.Keys.LShift, True)
+start_macro.press("Left Shift")
 
 # Macro executed to stop the AB
 stop_macro = gremlin.macro.Macro()
-stop_macro.action(gremlin.macro.Keys.LShift, False)
+stop_macro.release("Left Shift")
 
 
 @t16000m.button(1)
@@ -23,8 +23,8 @@ def cycle_ab(event):
     global g_ab_active
     if event.is_pressed:
         if g_ab_active:
-            stop_macro.run()
+            gremlin.macro.MacroManager().add_macro(stop_macro, None, event)
         else:
-            start_macro.run()
+            gremlin.macro.MacroManager().add_macro(start_macro, None, event)
         g_ab_active = not g_ab_active
 
